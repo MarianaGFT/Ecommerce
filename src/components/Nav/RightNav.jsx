@@ -74,7 +74,7 @@ const RightNav = ({ open, setOpen }) => {
      {usuario ?(
        <a href='/login' onClick={() => setOpen(!open)} onClick={logOut}>
        <span>Log Out</span>
-     </a>
+     </a> 
      ):(
         <a href='/login' onClick={() => setOpen(!open)}>
         <span>Sign in</span>
