@@ -1,17 +1,20 @@
-import React from "react";
+import React,{useContext,useEffect, useState} from "react";
 import styled from "styled-components";
-import { button } from "react-bootstrap";
+import { button,Form } from "react-bootstrap";
+import {productosContext} from '../Context/Productos/ProductosState'
+import Loader from '../Layout/Loader'
 
 const DetailsContainer = styled.div`
   width: 100%;
   height: auto;
   padding: 1rem;
+  
 
   .information-container {
     height: auto;
     width: 90%;
     background-color: #fff;
-    margin: 0 auto;
+    margin:  50px auto;
     text-align: left;
     /* padding: 0 2rem; */
   }
@@ -28,6 +31,7 @@ const DetailsContainer = styled.div`
 
   img {
     width: 9rem;
+    
   }
 
   .product-mayus {
@@ -50,44 +54,65 @@ const TableDetails = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.125);
   display: inline-flex;
   justify-content: space-between;
+  align-items:center;
   padding: 0.5rem;
   margin-top: 0.5rem;
 `;
 
 const LowerCase = styled.p`
+  
   color: #55595c;
   font-size: 0.8rem;
   margin: 0 0.5rem;
 `;
 
-function DetailsItem({ img }) {
+function DetailsItem({match}) {
+  const {producto,obtenerProducto,loading}=useContext(productosContext)
+  const[qty,setQty]=useState(1)
+
+  useEffect(() => {
+   obtenerProducto(match.params.id)
+  }, [match])
+
   return (
     <DetailsContainer>
-      <div className='information-container'>
+    
+        <div className='information-container'>
+        {loading ? (<Loader/>):(
         <div>
+        
           <div className='container-img'>
-            <img src={img}></img>
+            <img src={producto.image}></img>
           </div>
           <div className='container-info'>
-            <p className='product-mayus'>PLAY STATION 5</p>
+            <p className='product-mayus'>{producto.name}</p>
             <hr></hr>
-            <LowerCase>12 reviews</LowerCase>
+            <LowerCase>{producto.numReviews}</LowerCase>
             <hr></hr>
-            <p className='product-mayus'>PRICE: $29.99</p>
+            <p className='product-mayus'>PRICE:$ {producto.price}</p>
             <hr></hr>
             <LowerCase>
-              Description Meet Echo Dot - Our most popular smart speaker with a fabric design. It is
-              our most compact smart speaker that fits perfectly into small space
+              {producto.description}
             </LowerCase>
           </div>
           <div className='container-table'>
+         {producto.stock!==0 && <TableDetails>
+              <LowerCase>Cantidad</LowerCase>
+              <LowerCase> <Form.Control size="sm" as ='select' value={qty} onChange={(e)=>setQty(e.target.value)}>
+                                {/* Toma el array de Stock mapeandolo y haciendo cada uno de los elementos un select
+                                   en este por eejemplo cada cantidad de stock que saca la pinta como una opción del select */}
+                                    {[...Array(producto.stock ).keys()].map((x)=>(
+                                        <option key={x+1} value={x+1}>{x+1}</option>
+                                    ))}
+                                </Form.Control></LowerCase>
+            </TableDetails>}
             <TableDetails>
-              <LowerCase>Price:</LowerCase>
-              <LowerCase>$29.99</LowerCase>
+              <LowerCase>Total:</LowerCase>
+              <LowerCase>{producto.price * qty}</LowerCase>
             </TableDetails>
             <TableDetails>
               <p className='product-minus'>Stock:</p>
-              <p className='product-minus'>Out of stock</p>
+              <p className='product-minus'>{producto.stock==0? "Sin unidades disponibles":"Disponible"}</p>
             </TableDetails>
             <TableDetails>
               <button type='button' class='btn btn-secondary'>
@@ -96,7 +121,10 @@ function DetailsItem({ img }) {
             </TableDetails>
           </div>
         </div>
+       )}
       </div>
+      
+      
     </DetailsContainer>
   );
 }

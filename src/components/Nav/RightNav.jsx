@@ -1,5 +1,6 @@
-import React from "react";
+import React,{useContext} from "react";
 import styled from "styled-components";
+import {usuariosContext} from '../../Context/Usuarios/UsuariosState'
 
 const Ul = styled.div`
   list-style: none;
@@ -64,14 +65,21 @@ const Ul = styled.div`
 `;
 
 const RightNav = ({ open, setOpen }) => {
+  const {usuario,logOut}=useContext(usuariosContext)
   return (
     <Ul open={open}>
-      <a href='#membresias' onClick={() => setOpen(!open)}>
+      <a href='/carrito' onClick={() => setOpen(!open)}>
         <span>Cart</span>
       </a>
-      <a href='#servicios' onClick={() => setOpen(!open)}>
+     {usuario ?(
+       <a href='/login' onClick={() => setOpen(!open)} onClick={logOut}>
+       <span>Log Out</span>
+     </a>
+     ):(
+        <a href='/login' onClick={() => setOpen(!open)}>
         <span>Sign in</span>
       </a>
+     )}
     </Ul>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Burger from "./Burger";
+import {Link}from 'react-router-dom'
 
 const Nav = styled.nav`
   background-color: #343a40;
@@ -44,7 +45,7 @@ const Navbar = ({ open, setOpen }) => {
   return (
     <>
       <Nav id='navbar'>
-        <p>PRACTICE SHOP</p>
+        <Link to="/"><p>PRACTICE SHOP</p></Link>
         <Burger open={open} setOpen={setOpen} />
       </Nav>
     </>

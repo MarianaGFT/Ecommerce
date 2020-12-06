@@ -1,12 +1,10 @@
-import React from "react";
+import React,{useContext,useEffect} from "react";
 import styled from "styled-components";
 import CardItem from "./CardItem";
 import Iphone from "../../assets/img/iphone-pink.jpg";
 import Laptop from "../../assets/img/laptop.jpg";
 import Playstation5 from "../../assets/img/playstation-5.jpg";
-
-import DetailsItem from "../DetailsItem";
-
+import {productosContext} from '../../Context/Productos/ProductosState'
 const HeroContainer = styled.div`
   height: auto;
   width: 100%;
@@ -63,15 +61,20 @@ const HeroContainer = styled.div`
 `;
 
 function Hero() {
+  const {obtenerProductos,productos}=useContext(productosContext)
+
+  useEffect(() => {
+    if(productos==null) console.log('xd')
+    obtenerProductos();
+    console.log(productos)
+  }, [])
+  
   return (
     <HeroContainer>
       <p className='hero-title'>LATEST PRODUCTS</p>
       <div className='hero-grid'>
-        <CardItem img={Iphone} name='Iphone rosa' reviews='12' price='29.99' />
-        <CardItem img={Laptop} name='Laptop Huawei' reviews='10' price='45.99' />
-        <CardItem img={Playstation5} name='Playstation 5' reviews='7' price='26.99' />
+        {productos.map(producto=>(<CardItem key={producto._id} producto={producto}  />))}
       </div>
-      <DetailsItem img={Playstation5} />
     </HeroContainer>
   );
 }
