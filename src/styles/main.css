@@ -1,0 +1,10 @@
+/* Aquí se importan todos los estilos */
+
+/* Variables css: colores, efectos, etc */
+@import './abstract/variables.css';
+
+
+/* Margenes, paddgins, bordes */
+@import './base/utilities.css';
+
+/* Estilos de componenntes */
