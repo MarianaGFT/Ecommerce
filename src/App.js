@@ -4,6 +4,7 @@ import Navbar from "./components/Nav/Navbar";
 import RightNav from "./components/Nav/RightNav";
 import Hero from "./components/Hero/Hero";
 import DetailsItem from "./components/DetailsItem";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ProductosState } from "./Context/Productos/ProductosState";
 import { UsuariosState } from "./Context/Usuarios/UsuariosState";
@@ -11,6 +12,7 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Carrito from "./components/carrito/carrito";
 import Checkout from "./components/Checkout/Checkout";
+
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -33,6 +35,7 @@ function App() {
         </Router>
       </UsuariosState>
     </ProductosState>
+    
   );
 }
 
