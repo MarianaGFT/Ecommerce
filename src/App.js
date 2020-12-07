@@ -7,6 +7,7 @@ import DetailsItem from "./components/DetailsItem";
 import {BrowserRouter as Router, Switch,Route} from 'react-router-dom'
 import {ProductosState} from './Context/Productos/ProductosState'
 import {UsuariosState} from './Context/Usuarios/UsuariosState'
+import {CarritoState} from './Context/Carrito/CarritoState'
 import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
 
@@ -15,6 +16,7 @@ function App() {
   return (
     <ProductosState>
     <UsuariosState>
+    <CarritoState>
     <Router>
     <div className='App'>
       <Navbar open={open} setOpen={setOpen} />
@@ -28,8 +30,10 @@ function App() {
       
     </div>
     </Router>
+    </CarritoState>
     </UsuariosState>
     </ProductosState>
+    
   );
 }
 
