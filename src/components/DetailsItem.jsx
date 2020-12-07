@@ -2,6 +2,7 @@ import React,{useContext,useEffect, useState} from "react";
 import styled from "styled-components";
 import { button,Form } from "react-bootstrap";
 import {productosContext} from '../Context/Productos/ProductosState'
+import {carritoContext} from '../Context/Carrito/CarritoState'
 import Loader from '../Layout/Loader'
 
 const DetailsContainer = styled.div`
@@ -66,14 +67,21 @@ const LowerCase = styled.p`
   margin: 0 0.5rem;
 `;
 
-function DetailsItem({match}) {
+function DetailsItem({match,history}) {
   const {producto,obtenerProducto,loading}=useContext(productosContext)
+  const { agregarItem}=useContext(carritoContext)
   const[qty,setQty]=useState(1)
 
   useEffect(() => {
    obtenerProducto(match.params.id)
   }, [match])
 
+  const clickHandler=e=>{
+    e.preventDefault()
+    producto.qty=qty
+    agregarItem(producto)
+    history.push('/carrito')
+  }
   return (
     <DetailsContainer>
     
@@ -115,7 +123,7 @@ function DetailsItem({match}) {
               <p className='product-minus'>{producto.stock==0? "Sin unidades disponibles":"Disponible"}</p>
             </TableDetails>
             <TableDetails>
-              <button type='button' class='btn btn-secondary'>
+              <button type='button' class='btn btn-secondary'disabled={producto.stock===0?true:false} onClick={clickHandler}>
                 ADD TO CART
               </button>
             </TableDetails>
