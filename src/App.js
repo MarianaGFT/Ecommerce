@@ -9,7 +9,7 @@ import { ProductosState } from "./Context/Productos/ProductosState";
 import { UsuariosState } from "./Context/Usuarios/UsuariosState";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
-import Carrito from "./components/Carrito/Carrito";
+import Carrito from "./components/carrito/carrito";
 import Checkout from "./components/Checkout/Checkout";
 
 function App() {
