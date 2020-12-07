@@ -28,8 +28,8 @@ function App() {
                 <Route exact path='/product/:id?' component={DetailsItem} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/register' component={Register} />
-                <Route exact path='/cart' component={Carrito} />
-                <Route exact path='/checkout' component={Checkout} />
+                <Route exact path='/carrito' component={Carrito} />
+                <Route exact path='/checkOut' component={Checkout} />
               </Switch>
             </div>
           </Router>
