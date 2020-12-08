@@ -12,6 +12,7 @@ import Carrito from "./components/Carrito/Carrito";
 import Checkout from "./components/Checkout/Checkout";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
+import Orders from "./components/Orders/Orders";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -30,6 +31,7 @@ function App() {
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/carrito' component={Carrito} />
                 <Route exact path='/checkOut' component={Checkout} />
+                <Route exact path='/orders' component={Orders} />
               </Switch>
             </div>
           </Router>
